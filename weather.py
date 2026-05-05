@@ -11,7 +11,7 @@ def get_weather(city):
         "appid": API_KEY,
     }
 
-    response = requests.get(BASE_URL, params=params) #params includes the API key, which is sent as a url to the site.
+    response = requests.get(BASE_URL, params=params) #params includes the API key, which is sent as a url to the site. Use an HTTP Header instead
 
     #collect from 3rd party API
     data = response.json()
@@ -33,4 +33,4 @@ if __name__ == "__main__":
     
     #collect from user
     city = input("Enter city name: ")
-    get_weather(city) #No input verification is happening, bad data can easily be put in.
+    get_weather(city) #No input verification is happening, bad data can easily be put in. Whitelist allowed characters to ensure bad actors can't use symbols and other things.
