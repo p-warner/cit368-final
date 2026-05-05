@@ -10,7 +10,7 @@ def get_weather(city):
         "q": city,
         "appid": API_KEY,
     }
-
+ 
     response = requests.get(BASE_URL, params=params)
 
     #collect from 3rd party API
