@@ -1,8 +1,8 @@
 import requests
 import sqlite3
 
-API_KEY = "VEhpcyBpcyBhIGZha2Uga2V5LCBidXQgbWF5YmUgbG9va3MgbGlrZSBvbmU="
-BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
+API_KEY = "VEhpcyBpcyBhIGZha2Uga2V5LCBidXQgbWF5YmUgbG9va3MgbGlrZSBvbmU=" #Leaking an API key, this should be an environment variable
+BASE_URL = "http://api.openweathermap.org/data/2.5/weather" 
 DB = None
 
 def get_weather(city):
@@ -11,17 +11,18 @@ def get_weather(city):
         "appid": API_KEY,
     }
 
-    response = requests.get(BASE_URL, params=params)
+    response = requests.get(BASE_URL, params=params) #params includes the API key, which is sent as a url to the site.
 
     #collect from 3rd party API
     data = response.json()
     
     city_name = data["name"]
-    temp = data["main"]["temp"]
+    temp = data["main"]["temp"] #This should have some validation done to ensure the data is good before putting it into a database.
 
     #insert into DB
     c = DB.cursor()
-    c.execute("INSERT INTO history (city, temp) VALUES (" + city_name +", " + temp + ")")
+    c.execute("INSERT INTO history (city, temp) VALUES (" + city_name +", " + temp + ")") #Should be a parameterized statement to ensure SQL injection does not happen.
+    #This statement also just doesn't make sense, if this was wanted data it should also have a timestamp to ensure the rows are unique
     DB.commit()
 
     print(f"\nWeather in " + city)
@@ -32,4 +33,4 @@ if __name__ == "__main__":
     
     #collect from user
     city = input("Enter city name: ")
-    get_weather(city)
+    get_weather(city) #No input verification is happening, bad data can easily be put in.
