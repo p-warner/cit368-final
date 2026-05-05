@@ -1,7 +1,7 @@
 import requests
 import sqlite3
 
-API_KEY = "VEhpcyBpcyBhIGZha2Uga2V5LCBidXQgbWF5YmUgbG9va3MgbGlrZSBvbmU="
+API_KEY = "VEhpcyBpcyBhIGZha2Uga2V5LCBidXQgbWF5YmUgbG9va3MgbGlrZSBvbmU=" #Leaking API key
 BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 DB = None
 
@@ -31,5 +31,6 @@ if __name__ == "__main__":
     DB = sqlite3.connect("weather.db")
     
     #collect from user
+    #No input validation
     city = input("Enter city name: ")
     get_weather(city)
