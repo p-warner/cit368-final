@@ -3,7 +3,7 @@
 import requests
 import sqlite3
 
-#Visible secret stored
+#Visible secret leaked
 #TODO: move to env var, .gitignor-ed file, etc.
 API_KEY = "VEhpcyBpcyBhIGZha2Uga2V5LCBidXQgbWF5YmUgbG9va3MgbGlrZSBvbmU="
 #plaintext protocol, traffic visible to eavesdroppers, API key will be exposed in transit to API
